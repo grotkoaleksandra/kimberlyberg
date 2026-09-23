@@ -2,19 +2,19 @@
    Palette and type live here; everything else is layout. */
 
 :root {
-  --ink:        #2b2430;
-  --ink-soft:   #5c5363;
-  --paper:      #fbf8f4;
-  --paper-2:    #f3ede5;
-  --line:       #e3dad0;
-  --accent:     #7a5c86;   /* dusk violet */
-  --accent-dk:  #5e4568;
-  --gold:       #a8875a;
+  --ink:        #2c322a;   /* deep forest */
+  --ink-soft:   #5b6356;
+  --paper:      #f8f6ef;   /* linen */
+  --paper-2:    #eaeade;   /* pale sage */
+  --line:       #d7d8c6;
+  --accent:     #5c7357;   /* moss */
+  --accent-dk:  #42543e;
+  --gold:       #7d6431;   /* dried grass */
 
   --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   --sans:  "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
-  --wrap: 1080px;
+  --wrap: 940px;
   --gutter: 20px;
 }
 
@@ -25,7 +25,7 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  background: var(--paper);
+  background: #1a2416;
   color: var(--ink);
   font-family: var(--sans);
   font-size: 17px;
@@ -76,6 +76,7 @@ section { padding: clamp(56px, 9vw, 104px) 0; }
 
 /* ---------- hero ---------- */
 .hero {
+  position: relative;
   max-width: var(--wrap); margin-inline: auto;
   padding: clamp(24px, 5vw, 56px) var(--gutter) clamp(56px, 9vw, 96px);
   display: grid; gap: clamp(32px, 6vw, 64px);
@@ -98,7 +99,7 @@ section { padding: clamp(56px, 9vw, 104px) 0; }
 .hero-photo { margin: 0; }
 .hero-photo img {
   width: 100%; aspect-ratio: 4 / 5; object-fit: cover;
-  border-radius: 200px 200px 8px 8px;          /* soft arch */
+  border-radius: 50% 50% 14px 14px / 42% 42% 10px 10px;   /* seed pod */
   background: var(--paper-2);
 }
 
@@ -122,7 +123,8 @@ section { padding: clamp(56px, 9vw, 104px) 0; }
 .portrait { margin: 0; }
 .portrait img {
   width: 100%; aspect-ratio: 4 / 5; object-fit: cover;
-  border-radius: 8px; background: var(--paper);
+  border-radius: 140px 14px 140px 14px;   /* leaf */
+  background: var(--paper);
 }
 
 /* ---------- steps ---------- */
@@ -151,8 +153,11 @@ section { padding: clamp(56px, 9vw, 104px) 0; }
 .card-list { list-style: none; margin: 20px 0 26px; padding: 0; color: var(--ink-soft); }
 .card-list li { padding-left: 22px; position: relative; margin-bottom: 8px; }
 .card-list li::before {
-  content: ""; position: absolute; left: 0; top: .62em;
-  width: 7px; height: 7px; border-radius: 50%; background: var(--gold);
+  content: ""; position: absolute; left: 0; top: .58em;
+  width: 9px; height: 9px;
+  border-radius: 0 100% 0 100%;
+  transform: rotate(-20deg);
+  background: var(--accent);
 }
 .fineprint { font-size: .85rem; color: var(--ink-soft); margin: 14px 0 0; text-align: center; }
 .aside { margin-top: 28px; color: var(--ink-soft); }
@@ -161,8 +166,21 @@ section { padding: clamp(56px, 9vw, 104px) 0; }
 .quote-band { padding: clamp(48px, 7vw, 88px) 0; }
 .pullquote {
   margin: 0; text-align: center;
-  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
-  padding: clamp(28px, 5vw, 44px) 0;
+  border-bottom: 1px solid var(--line);
+  padding: 0 0 clamp(28px, 5vw, 44px);
+}
+.leaf-rule {
+  display: flex; align-items: center; justify-content: center;
+  gap: 16px; margin: 0 0 clamp(26px, 4vw, 38px);
+}
+.leaf-rule::before, .leaf-rule::after {
+  content: ""; height: 1px; width: min(140px, 24vw); background: var(--line);
+}
+.leaf-rule span {
+  display: block; width: 11px; height: 11px;
+  border-radius: 0 100% 0 100%;
+  transform: rotate(-20deg);
+  background: var(--gold);
 }
 .pullquote p {
   font-family: var(--serif); font-style: italic;
@@ -196,3 +214,32 @@ section { padding: clamp(56px, 9vw, 104px) 0; }
 }
 .site-footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 .site-footer p { margin: 0; }
+
+/* ---------- botanical accent ---------- */
+.sprig {
+  position: absolute; left: calc(var(--gutter) - 6px); bottom: 8px;
+  width: 104px; height: auto;
+  color: var(--accent); opacity: .3;
+  pointer-events: none;
+}
+.sprig path { fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; }
+@media (max-width: 980px) { .sprig { display: none; } }
+@media (prefers-reduced-motion: no-preference) { .sprig { transition: opacity .4s; } }
+
+/* ---------- fixed backdrop + scrolling sheet ---------- */
+.backdrop {
+  position: fixed; inset: 0; z-index: 0;
+  background: #1a2416 url("assets/backdrop.svg") center center / cover no-repeat;
+}
+.sheet {
+  position: relative; z-index: 1;
+  max-width: 1020px;
+  margin: clamp(14px, 2.6vw, 48px) auto;
+  background: var(--paper);
+  border-radius: clamp(14px, 2vw, 26px);
+  box-shadow: 0 20px 70px rgba(12, 22, 10, .42);
+  overflow: hidden;
+}
+@media (max-width: 700px) {
+  .sheet { margin-inline: 12px; }
+}
