@@ -143,9 +143,12 @@ section { padding: clamp(56px, 9vw, 104px) 0; }
 .steps p { color: var(--ink-soft); margin: 0; }
 
 /* ---------- booking card ---------- */
+#book .wrap { text-align: center; }
 .card {
   background: var(--paper); border: 1px solid var(--line); border-radius: 14px;
-  padding: clamp(24px, 4vw, 36px); max-width: 480px; margin-top: 32px;
+  padding: clamp(24px, 4vw, 36px); max-width: 480px;
+  margin: 32px auto 0;
+  text-align: left;      /* the list keeps its leaf bullets on the left */
 }
 .card-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
 .card-head h3 { margin: 0; }
@@ -160,7 +163,7 @@ section { padding: clamp(56px, 9vw, 104px) 0; }
   background: var(--accent);
 }
 .fineprint { font-size: .85rem; color: var(--ink-soft); margin: 14px 0 0; text-align: center; }
-.aside { margin-top: 28px; color: var(--ink-soft); }
+.aside { margin-top: 28px; color: var(--ink-soft); text-align: center; }
 
 /* ---------- pull quote ---------- */
 .quote-band { padding: clamp(48px, 7vw, 88px) 0; }
