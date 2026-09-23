@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- =========================================================
+     THINGS TO EDIT BEFORE LAUNCH  (search for "EDIT:")
+     1. Kimberly's bio copy          - section #about
+     2. Photos                       - assets/kimberly-1.jpg etc.
+     3. Email + phone                - section #contact and footer
+     4. Stripe payment link          - the "Book & pay" buttons
+     5. Domain                       - CNAME file + og:url below
+     ========================================================= -->
+
+<title>Kimberly Berg — Intuitive Readings</title>
+<meta name="description" content="Intuitive readings with Kimberly Berg. One hour, one-to-one, by phone or video. Book a session.">
+
+<link rel="canonical" href="https://kimberlyberg.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kimberly Berg — Intuitive Readings">
+<meta property="og:description" content="Intuitive readings with Kimberly Berg. One hour, one-to-one, by phone or video.">
+<meta property="og:url" content="https://kimberlyberg.com/">
+<meta property="og:image" content="https://kimberlyberg.com/assets/kimberly-1.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' x='4' font-size='26'>&#10024;</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <a class="wordmark" href="#top">Kimberly&nbsp;Berg</a>
+  <nav aria-label="Main">
+    <a href="#about">About</a>
+    <a href="#reading">The reading</a>
+    <a href="#book">Book</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main id="main">
+
+  <!-- ---------- HERO ---------- -->
+  <section class="hero" id="top">
+    <div class="hero-text">
+      <p class="eyebrow">Intuitive readings</p>
+      <h1>Kimberly Berg</h1>
+      <!-- EDIT: one or two lines in Kimberly's own words -->
+      <p class="lede">
+        A quiet hour, one to one, to look at what's actually going on —
+        and at what's waiting on the other side of it.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#book">Book a reading</a>
+        <a class="btn btn-ghost" href="#reading">What happens in a session</a>
+      </div>
+    </div>
+    <figure class="hero-photo">
+      <!-- EDIT: replace with a real photo -->
+      <img src="assets/kimberly-1.jpg" alt="Portrait of Kimberly Berg" width="800" height="1000" loading="eager">
+    </figure>
+  </section>
+
+  <!-- ---------- ABOUT ---------- -->
+  <section id="about" class="band">
+    <div class="wrap two-col">
+      <div>
+        <h2>About Kimberly</h2>
+        <!-- EDIT: replace all three paragraphs with Kimberly's own words -->
+        <p>
+          I've been reading for people for over twenty years. Some come to me at a
+          crossroads, some out of curiosity, some because something has gone quiet
+          and they'd like to know why.
+        </p>
+        <p>
+          I don't do theatre and I don't do fear. I tell you what I get, plainly,
+          and we talk it through together. You are welcome to bring questions, and
+          you are just as welcome to bring none at all.
+        </p>
+        <p>
+          Readings happen by phone or video, wherever you are.
+        </p>
+      </div>
+      <figure class="portrait">
+        <!-- EDIT: second photo, or delete this <figure> -->
+        <img src="assets/kimberly-2.jpg" alt="" width="700" height="900" loading="lazy">
+      </figure>
+    </div>
+  </section>
+
+  <!-- ---------- THE READING ---------- -->
+  <section id="reading">
+    <div class="wrap">
+      <h2>What a reading is</h2>
+      <ol class="steps">
+        <li>
+          <span class="step-n">1</span>
+          <h3>You book an hour</h3>
+          <p>Pick your time and pay online. You'll get a confirmation straight away.</p>
+        </li>
+        <li>
+          <span class="step-n">2</span>
+          <h3>We talk</h3>
+          <p>Phone or video, one full hour, just the two of us. No script, no set format.</p>
+        </li>
+        <li>
+          <span class="step-n">3</span>
+          <h3>You keep the recording</h3>
+          <!-- EDIT: only keep this if Kimberly actually records sessions -->
+          <p>If you'd like the session recorded, I'll send it to you afterwards.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ---------- BOOK & PAY ---------- -->
+  <section id="book" class="band">
+    <div class="wrap">
+      <h2>Book &amp; pay</h2>
+      <div class="card">
+        <div class="card-head">
+          <h3>One-hour reading</h3>
+          <p class="price"><span>$180</span></p>
+        </div>
+        <ul class="card-list">
+          <li>A full hour, one to one</li>
+          <li>By phone or video</li>
+          <li>Paid securely by card</li>
+        </ul>
+        <!-- EDIT: replace href with the Stripe payment link -->
+        <a class="btn btn-primary btn-wide"
+           href="#"
+           data-stripe-link="REPLACE_WITH_STRIPE_PAYMENT_LINK"
+           rel="noopener">Book &amp; pay — $180</a>
+        <p class="fineprint">
+          Payment is handled by Stripe. Your card details never touch this site.
+        </p>
+      </div>
+      <p class="aside">
+        Prefer to arrange it directly? <a href="#contact">Get in touch</a> and we'll sort it out between us.
+      </p>
+    </div>
+  </section>
+
+  <!-- ---------- CONTACT ---------- -->
+  <section id="contact">
+    <div class="wrap narrow">
+      <h2>Get in touch</h2>
+      <p>Questions before you book are always welcome.</p>
+      <ul class="contact-list">
+        <!-- EDIT: real email and phone -->
+        <li><span class="label">Email</span> <a href="mailto:hello@kimberlyberg.com">hello@kimberlyberg.com</a></li>
+        <li><span class="label">Phone</span> <a href="tel:+10000000000">+1 (000) 000-0000</a></li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>© <span id="year">2026</span> Kimberly Berg</p>
+    <p><a href="mailto:hello@kimberlyberg.com">hello@kimberlyberg.com</a></p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Point every "Book & pay" button at the Stripe link once it exists.
+  document.querySelectorAll('[data-stripe-link]').forEach(function (el) {
+    var link = el.dataset.stripeLink;
+    if (link && link.indexOf('http') === 0) { el.href = link; el.target = '_blank'; }
+  });
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Kimberly Berg",
+  "jobTitle": "Intuitive reader",
+  "url": "https://kimberlyberg.com/",
+  "email": "hello@kimberlyberg.com"
+}
+</script>
+</body>
+</html>
