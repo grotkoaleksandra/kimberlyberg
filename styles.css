@@ -130,7 +130,9 @@ section { padding: clamp(56px, 9vw, 104px) 0; }
   list-style: none; margin: 40px 0 0; padding: 0;
   display: grid; gap: 32px; grid-template-columns: 1fr;
 }
-@media (min-width: 720px) { .steps { grid-template-columns: repeat(3, 1fr); gap: 40px; } }
+@media (min-width: 720px) {
+  .steps { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 40px; }
+}
 .steps li { padding-top: 20px; border-top: 1px solid var(--line); }
 .step-n {
   display: block; font-family: var(--serif); font-size: 1.1rem;
@@ -154,6 +156,26 @@ section { padding: clamp(56px, 9vw, 104px) 0; }
 }
 .fineprint { font-size: .85rem; color: var(--ink-soft); margin: 14px 0 0; text-align: center; }
 .aside { margin-top: 28px; color: var(--ink-soft); }
+
+/* ---------- pull quote ---------- */
+.quote-band { padding: clamp(48px, 7vw, 88px) 0; }
+.pullquote {
+  margin: 0; text-align: center;
+  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  padding: clamp(28px, 5vw, 44px) 0;
+}
+.pullquote p {
+  font-family: var(--serif); font-style: italic;
+  font-size: clamp(1.3rem, 3vw, 1.9rem); line-height: 1.4;
+  color: var(--ink); margin: 0 0 .8em;
+  text-wrap: balance;
+}
+.pullquote cite {
+  font-family: var(--sans); font-style: normal;
+  font-size: .78rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--gold);
+}
+.pullquote cite::before { content: "\2014\00a0"; }
 
 /* ---------- contact ---------- */
 .contact-list { list-style: none; margin: 28px 0 0; padding: 0; }
