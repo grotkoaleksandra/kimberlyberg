@@ -143,9 +143,10 @@ section { padding: clamp(56px, 9vw, 104px) 0; }
   list-style: none; margin: 40px 0 0; padding: 0;
   display: grid; gap: 32px; grid-template-columns: 1fr;
 }
-@media (min-width: 720px) {
-  .steps { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 40px; }
-}
+/* four steps: 2x2 on tablet, one row on desktop - auto-fit would leave a
+   stranded fourth card on a second row at middling widths */
+@media (min-width: 620px) { .steps { grid-template-columns: 1fr 1fr; gap: 36px 40px; } }
+@media (min-width: 980px) { .steps { grid-template-columns: repeat(4, 1fr); gap: 32px; } }
 .steps li { padding-top: 20px; border-top: 1px solid var(--line); }
 .step-n {
   display: block; font-family: var(--serif); font-size: 1.1rem;
