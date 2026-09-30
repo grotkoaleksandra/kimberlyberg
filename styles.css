@@ -1,27 +1,19 @@
 /* Kimberly Berg — energy readings
-   Colours are sampled from the backdrop painting: terracotta and clay from
-   the fire in it, plum-brown from its shadows, ochre and a muted teal from
-   the wash. Everything else is layout. */
+   One grotesk, two greys, one accent. No cards, no bands, no shadows,
+   no gradients. Sections are separated by hairlines. Kimberly's painting
+   appears full bleed rather than as wallpaper behind everything. */
 
 :root {
-  --ink:        #2c211d;   /* plum-brown, the painting's darkest shadows */
-  --ink-soft:   #665349;
-  --paper:      #f7f1e7;   /* warm paper */
-  --paper-2:    #eee3d4;
-  --line:       #dccdb8;
-  --accent:     #a24a33;   /* terracotta */
-  --accent-dk:  #7d3624;
-  --teal:       #41625f;   /* the green-blue wash */
-  --gold:       #7d5e26;   /* ochre */
+  --bone:   #fbfbf9;
+  --ink:    #111110;
+  --grey:   #6a6a66;
+  --rule:   #dcdcd6;
+  --accent: #b82a0c;
 
-  --cream:      #f6efe4;   /* type over the painting */
-  --cream-soft: #dccfc0;
+  --sans: "Archivo", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
 
-  --serif: "Fraunces", Georgia, "Times New Roman", serif;
-  --sans:  "Karla", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-
-  --wrap: 940px;
-  --gutter: 22px;
+  --wrap: 1120px;
+  --gutter: 24px;
 }
 
 * { box-sizing: border-box; }
@@ -31,247 +23,146 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  background: #1d1512;
+  background: var(--bone);
   color: var(--ink);
   font-family: var(--sans);
-  font-size: 17px;
-  line-height: 1.65;
+  font-size: 16px;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 img { max-width: 100%; height: auto; display: block; }
 
-a { color: var(--accent-dk); }
-a:hover { color: var(--ink); }
+a { color: var(--ink); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--accent); }
 
-h1, h2, h3 {
-  font-family: var(--serif); font-weight: 500; line-height: 1.1; margin: 0 0 .5em;
-  font-variation-settings: "SOFT" 30, "WONK" 1;
-  font-optical-sizing: auto;
-}
-h1 { font-size: clamp(2.6rem, 7vw, 4.4rem); letter-spacing: -.02em; }
-h2 { font-size: clamp(1.75rem, 3.6vw, 2.35rem); letter-spacing: -.01em; }
-h3 { font-size: 1.1rem; letter-spacing: .005em; }
-p  { margin: 0 0 1.15em; }
+h1, h2, h3 { font-weight: 600; margin: 0 0 .55em; letter-spacing: -.035em; line-height: 1.02; }
+h1 { font-size: clamp(3rem, 8.5vw, 6.2rem); }
+h2 { font-size: clamp(1.6rem, 3.2vw, 2.2rem); letter-spacing: -.03em; }
+h3 { font-size: 1rem; font-weight: 600; letter-spacing: -.01em; line-height: 1.3; }
+p  { margin: 0 0 1.1em; }
 
 .wrap { width: 100%; max-width: var(--wrap); margin-inline: auto; padding-inline: var(--gutter); }
-.wrap.narrow { max-width: var(--wrap); }   /* element max-widths do the narrowing */
+.wrap.narrow { max-width: var(--wrap); }
 
-section { padding: clamp(60px, 9vw, 112px) 0; }
-.band { background: var(--paper-2); }
+section { padding: clamp(64px, 8vw, 104px) 0; border-top: 1px solid var(--rule); }
+.hero { border-top: 0; }
 
 .skip {
   position: absolute; left: -9999px;
-  background: var(--ink); color: var(--paper); padding: 10px 16px; z-index: 20;
+  background: var(--ink); color: var(--bone); padding: 10px 16px; z-index: 20;
 }
 .skip:focus { left: 12px; top: 12px; }
 
-/* ---------- fixed painting ---------- */
-/* Backdrop: painterly abstract by George Rosema, free under the Unsplash
-   License (unsplash.com/photos/6PHGHTZ0gI4). ::before washes green and blue
-   through it with the 'color' blend mode — recolours without flattening the
-   brushwork. ::after is the scrim that keeps the hero type readable. */
-.backdrop {
-  position: fixed; inset: 0; z-index: 0;
-  background: #24302b url("assets/backdrop-sky.jpg") center center / cover no-repeat;
-}
-.backdrop::before,
-.backdrop::after { content: ""; position: absolute; inset: 0; }
-.backdrop::before {
-  background:
-    radial-gradient(68% 54% at  8%  4%, #1c7f86 0%, rgba(28,127,134,0) 66%),
-    radial-gradient(74% 58% at 80%  6%, #235f74 0%, rgba(35,95,116,0) 70%),
-    radial-gradient(62% 52% at 94% 86%, #2f7d52 0%, rgba(47,125,82,0) 68%);
-  mix-blend-mode: color;
-  opacity: .62;
-}
-.backdrop::after {
-  background:
-    linear-gradient(104deg, rgba(20,13,11,.72) 0%, rgba(20,13,11,.4) 42%, rgba(20,13,11,.12) 70%),
-    linear-gradient(180deg, rgba(18,12,10,.5) 0%, rgba(18,12,10,0) 26%),
-    linear-gradient(0deg,   rgba(18,12,10,.62) 0%, rgba(18,12,10,0) 22%);
-}
-
-/* ---------- header, over the painting ---------- */
+/* ---------- header ---------- */
 .site-header {
-  position: relative; z-index: 2;
   display: flex; align-items: baseline; justify-content: space-between;
-  gap: 18px; flex-wrap: wrap;
+  gap: 20px; flex-wrap: wrap;
   max-width: var(--wrap); margin-inline: auto;
-  padding: 30px var(--gutter) 0;
+  padding: 20px var(--gutter);
 }
-.wordmark {
-  font-family: var(--serif); font-weight: 500; font-size: 1.15rem;
-  letter-spacing: .02em; text-decoration: none; color: var(--cream);
-}
-.site-header nav { display: flex; gap: clamp(16px, 3vw, 30px); flex-wrap: wrap; }
-.site-header nav a {
-  font-size: .82rem; letter-spacing: .09em; text-transform: uppercase;
-  text-decoration: none; color: var(--cream-soft);
-  padding-bottom: 3px; border-bottom: 1px solid transparent;
-}
-.site-header nav a:hover { color: var(--cream); border-bottom-color: var(--accent); }
+.wordmark { font-size: .95rem; font-weight: 600; letter-spacing: -.02em; text-decoration: none; color: var(--ink); }
+.site-header nav { display: flex; gap: 22px; flex-wrap: wrap; }
+.site-header nav a { font-size: .875rem; text-decoration: none; color: var(--grey); }
+.site-header nav a:hover { color: var(--ink); }
 
-/* ---------- hero, over the painting ---------- */
+/* ---------- hero ---------- */
 .hero {
-  position: relative; z-index: 2;
   max-width: var(--wrap); margin-inline: auto;
-  padding: clamp(60px, 11vw, 130px) var(--gutter) clamp(72px, 12vw, 150px);
-  display: grid; gap: clamp(36px, 6vw, 68px);
+  padding: clamp(28px, 4vw, 56px) var(--gutter) clamp(56px, 7vw, 92px);
+  display: grid; gap: clamp(28px, 4vw, 52px);
   grid-template-columns: 1fr;
   align-items: end;
-  color: var(--cream);
 }
-@media (min-width: 840px) { .hero { grid-template-columns: 1.12fr .88fr; } }
-.hero h1 { color: var(--cream); margin-bottom: .34em; }
-.eyebrow {
-  font-size: .76rem; letter-spacing: .26em; text-transform: uppercase;
-  color: var(--accent); margin: 0 0 1.4em;
-}
-.hero .eyebrow { color: #e0a288; }
-.lede {
-  font-family: var(--serif); font-weight: 400;
-  font-variation-settings: "SOFT" 60, "WONK" 1;
-  font-size: clamp(1.1rem, 2vw, 1.32rem);
-  line-height: 1.55; color: var(--cream-soft); max-width: 32ch;
-  margin-bottom: 0;
-}
-.hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
+@media (min-width: 900px) { .hero { grid-template-columns: 1.35fr .65fr; } }
+.eyebrow { font-size: .875rem; color: var(--accent); margin: 0 0 1.6em; }
+.hero h1 { margin-bottom: .22em; max-width: 12ch; }
+.lede { font-size: clamp(1.05rem, 1.5vw, 1.2rem); color: var(--grey); max-width: 38ch; margin: 0; }
+.hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; margin-top: 30px; }
 
 .hero-photo { margin: 0; }
-.hero-photo img {
-  width: 100%; aspect-ratio: 4 / 5; object-fit: cover;
-  border-radius: 2px;
-  box-shadow: 0 24px 60px rgba(14, 8, 6, .45);
+.hero-photo img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
+
+/* ---------- Kimberly's painting, full bleed, once ---------- */
+.plate {
+  height: clamp(200px, 32vw, 400px);
+  background: #24302b url("assets/backdrop-sky.jpg") center 42% / cover no-repeat;
 }
 
-/* ---------- buttons ---------- */
-.btn {
-  display: inline-block; text-decoration: none; text-align: center;
-  font-size: .82rem; letter-spacing: .12em; text-transform: uppercase;
-  padding: 15px 26px; border-radius: 2px;
-  border: 1px solid transparent;
-  transition: background .18s, color .18s, border-color .18s;
+/* ---------- links that act as buttons ---------- */
+.btn { display: inline-block; font-size: .9rem; text-decoration: none; }
+.btn-primary {
+  background: var(--ink); color: var(--bone);
+  padding: 13px 22px; border: 1px solid var(--ink);
 }
-.btn-primary { background: var(--accent); color: #fff; }
-.btn-primary:hover { background: var(--accent-dk); color: #fff; }
-.btn-ghost {
-  border: 0; border-bottom: 1px solid rgba(246,239,228,.38);
-  border-radius: 0; padding: 15px 2px; color: var(--cream-soft);
-}
-.btn-ghost:hover { border-bottom-color: var(--cream); color: var(--cream); }
-.btn-wide { display: block; width: 100%; }
+.btn-primary:hover { background: var(--accent); border-color: var(--accent); color: var(--bone); }
+.btn-ghost { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+.btn-ghost:hover { color: var(--accent); }
+.btn-wide { display: inline-block; }
 .btn:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
-/* ---------- the paper the reading sits on ---------- */
-.sheet {
-  position: relative; z-index: 1;
-  max-width: 1080px;
-  margin-inline: auto;
-  background: var(--paper);
-}
-@media (min-width: 1160px) { .sheet { max-width: 1080px; } }
-
 /* ---------- what it is ---------- */
-.two-col { display: grid; gap: clamp(30px, 5vw, 60px); grid-template-columns: 1fr; align-items: center; }
-@media (min-width: 840px) {
-  /* photo left so it does not echo the hero's text-left arrangement */
-  .two-col { grid-template-columns: .86fr 1.14fr; }
-  .two-col > div { order: 2; }
-  .two-col > .portrait { order: 1; }
-}
+.two-col { display: grid; gap: clamp(28px, 4vw, 56px); grid-template-columns: 1fr; align-items: start; }
+@media (min-width: 900px) { .two-col { grid-template-columns: .38fr .62fr; } }
+.two-col h2 { margin-bottom: .8em; }
+.two-col p { max-width: 62ch; }
 .portrait { margin: 0; }
-.portrait img {
-  width: 100%; aspect-ratio: 4 / 5; object-fit: cover;
-  border-radius: 2px; background: var(--paper);
-}
+.portrait img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
 
 /* ---------- how it works ---------- */
 .steps {
-  list-style: none; margin: 46px 0 0; padding: 0;
-  display: grid; gap: 34px 48px; grid-template-columns: 1fr;
-  counter-reset: step;
+  list-style: none; margin: 40px 0 0; padding: 0;
+  display: grid; gap: 32px; grid-template-columns: 1fr;
 }
-@media (min-width: 680px) { .steps { grid-template-columns: 1fr 1fr; } }
-.steps li { display: grid; grid-template-columns: auto 1fr; gap: 0 20px; align-items: baseline; }
-.step-n {
-  font-family: var(--serif); font-weight: 400; font-size: 2.1rem; line-height: 1;
-  color: var(--line); grid-row: span 2;
-}
-.steps h3 { margin: 0 0 .3em; }
-.steps p { color: var(--ink-soft); margin: 0; font-size: .96rem; }
+@media (min-width: 640px)  { .steps { grid-template-columns: 1fr 1fr; gap: 36px 40px; } }
+@media (min-width: 1000px) { .steps { grid-template-columns: repeat(4, 1fr); gap: 40px 32px; } }
+.steps li { border-top: 1px solid var(--ink); padding-top: 14px; }
+.step-n { display: block; font-size: .8rem; color: var(--grey); margin-bottom: 20px; }
+.steps h3 { margin: 0 0 .5em; }
+.steps p { color: var(--grey); margin: 0; font-size: .92rem; }
 
-/* ---------- pull quote ---------- */
-.quote-band { padding: clamp(52px, 7vw, 96px) 0; }
-.pullquote {
-  margin: 0; max-width: 34ch;
-  border-left: 2px solid var(--accent);
-  padding: 4px 0 4px 28px;
-}
+/* ---------- quote ---------- */
+.quote-band { padding: clamp(64px, 8vw, 104px) 0; }
+.pullquote { margin: 0; max-width: 24ch; }
 .pullquote p {
-  font-family: var(--serif); font-style: italic; font-weight: 400;
-  font-variation-settings: "SOFT" 60, "WONK" 1;
-  font-size: clamp(1.2rem, 2.4vw, 1.6rem); line-height: 1.45;
-  color: var(--ink); margin: 0 0 .7em;
+  font-size: clamp(1.6rem, 3.6vw, 2.6rem); font-weight: 500;
+  letter-spacing: -.035em; line-height: 1.08; margin: 0 0 1em;
 }
-.pullquote cite {
-  font-family: var(--sans); font-style: normal;
-  font-size: .74rem; letter-spacing: .16em; text-transform: uppercase;
-  color: var(--gold);
-}
+.pullquote cite { font-style: normal; font-size: .875rem; color: var(--grey); }
 
 /* ---------- sessions ---------- */
-.cards {
-  display: grid; gap: 0; grid-template-columns: 1fr;
-  max-width: 680px; margin: 40px 0 0;
-  border-top: 1px solid var(--line);
-}
-.card {
-  border-bottom: 1px solid var(--line);
-  padding: 24px 0;
-}
-/* side by side once there is room, split by a hairline */
+.cards { display: grid; gap: 0; grid-template-columns: 1fr; margin: 40px 0 0; max-width: 820px; }
 @media (min-width: 720px) {
-  .cards { grid-template-columns: 1fr 1fr; max-width: 800px; border-bottom: 1px solid var(--line); }
-  .card { border-bottom: 0; padding: 26px 0; }
-  .card:first-child { padding-right: 42px; }
-  .card + .card { border-left: 1px solid var(--line); padding-left: 42px; }
-  .card-list { flex-direction: column; gap: 4px; }
+  .cards { grid-template-columns: 1fr 1fr; }
+  .card:first-child { padding-right: 40px; }
+  .card + .card { padding-left: 40px; }
 }
-.card-head { display: flex; align-items: baseline; justify-content: space-between; gap: 18px; }
+.card { border-top: 1px solid var(--ink); padding: 16px 0 24px; }
+.card-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
 .card-head h3 { margin: 0; }
-.price { font-family: var(--serif); font-weight: 400; font-size: 1.7rem; margin: 0; color: var(--accent); }
-.card-list {
-  list-style: none; margin: 10px 0 0; padding: 0; color: var(--ink-soft);
-  display: flex; flex-wrap: wrap; gap: 4px 20px; font-size: .92rem;
-}
-.card-list li { position: relative; padding-left: 14px; }
-.card-list li::before {
-  content: ""; position: absolute; left: 0; top: .72em;
-  width: 5px; height: 1px; background: var(--gold);
-}
-.request { margin: 34px 0 0; max-width: 300px; }
-.aside { margin-top: 22px; color: var(--ink-soft); max-width: 46ch; font-size: .95rem; }
+.price { font-size: 1.5rem; font-weight: 500; letter-spacing: -.035em; margin: 0; }
+.card-list { list-style: none; margin: 14px 0 0; padding: 0; color: var(--grey); font-size: .9rem; }
+.card-list li { margin-bottom: 3px; }
+.request { margin: 40px 0 0; }
+.aside { margin-top: 26px; color: var(--grey); max-width: 52ch; font-size: .92rem; }
 
 /* ---------- contact ---------- */
-.contact-list { list-style: none; margin: 30px 0 0; padding: 0; max-width: 520px; }
+.contact-list { list-style: none; margin: 32px 0 0; padding: 0; max-width: 560px; }
 .contact-list li {
-  display: flex; gap: 20px; align-items: baseline;
-  padding: 15px 0; border-bottom: 1px solid var(--line);
+  display: flex; gap: 24px; align-items: baseline;
+  padding: 14px 0; border-bottom: 1px solid var(--rule);
 }
-.contact-list li:first-child { border-top: 1px solid var(--line); }
-.contact-list .label {
-  font-size: .72rem; letter-spacing: .16em; text-transform: uppercase;
-  color: var(--gold); min-width: 68px;
-}
+.contact-list li:first-child { border-top: 1px solid var(--ink); }
+.contact-list .label { font-size: .875rem; color: var(--grey); min-width: 72px; }
 
-/* ---------- footer, back on the painting ---------- */
+/* ---------- footer ---------- */
 .site-footer {
-  position: relative; z-index: 2;
-  padding: 40px 0 48px;
-  font-size: .86rem; color: var(--cream-soft);
+  border-top: 1px solid var(--rule);
+  padding: 26px 0 40px;
+  font-size: .875rem; color: var(--grey);
 }
 .site-footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 .site-footer p { margin: 0; }
-.site-footer a { color: var(--cream); }
-.site-footer a:hover { color: var(--cream); }
+.site-footer a { color: var(--grey); }
+.site-footer a:hover { color: var(--accent); }

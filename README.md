@@ -25,6 +25,21 @@ Search `index.html` for `EDIT:`.
 4. **Stripe link** — the `data-stripe-link` attribute on the Book & pay button. Paste the payment link URL there; the button wires itself up.
 5. **Domain** — rename `CNAME.example` to `CNAME`, and update `og:url` / `canonical` in `index.html`.
 
+## The paintings Kimberly chose
+
+Her brief: *"If we're going to use art, it should be the background look of the
+site like its a painting. Rich with color. Deep punctuating...can be abstract,
+trees are always my favorite too."* She sent two and said *"These two work, its
+the feeling I am looking for"* and *"A blend of these colors and were done."*
+
+| | Link | Licence |
+|---|---|---|
+| **In use** — orange, coral and mauve, by George Rosema | https://unsplash.com/photos/white-and-orange-smoke-on-gray-sky-6PHGHTZ0gI4 | Free under the Unsplash License. Saved as `assets/backdrop-sky.jpg` |
+| **Not used** — green and blue sky | https://unsplash.com/photos/a-painting-of-a-green-and-blue-sky-nuU7KbwezN0 | **Unsplash+**, a paid subscription. Needs a subscription (~$12/mo) before it can go on a public site |
+
+The one in use appears full bleed once, between the hero and the first section.
+It is not wallpaper behind the page.
+
 ## Preview locally
 
 ```
