@@ -12,9 +12,7 @@
   --rule:      rgba(241,230,212,.15);
   --rule-firm: rgba(241,230,212,.3);
 
-  /* Marcellus is inscriptional - carved rather than written, which is
-     where the esoteric weight comes from. Cardo carries the reading. */
-  --display: "Marcellus", "Iowan Old Style", Georgia, serif;
+  --display: "Playfair Display", "Iowan Old Style", Georgia, serif;
   --body:    "Cardo", "Iowan Old Style", Georgia, serif;
 
   --wrap: 1060px;
@@ -201,12 +199,15 @@ html.threshold-closed main { transform: translateY(14px); }
 
 /* ---------- what it is ---------- */
 .two-col { display: grid; gap: clamp(30px, 5vw, 60px); grid-template-columns: 1fr; align-items: center; }
-@media (min-width: 900px) { .two-col { grid-template-columns: .4fr .6fr; } }
-.two-col p { max-width: 58ch; color: var(--parch); margin-bottom: 1.5em; }
+@media (min-width: 900px) {
+  /* text first in the DOM, so the wide track is the first one */
+  .two-col { grid-template-columns: .64fr .36fr; }
+}
+.two-col p { max-width: 62ch; color: var(--parch); margin-bottom: 1.35em; }
 .two-col p.lead { font-size: 1.24rem; line-height: 1.55; color: var(--parch); }
 .portrait { margin: 0; }
 .portrait img {
-  width: 100%; aspect-ratio: 4 / 5; object-fit: cover;
+  width: 100%; aspect-ratio: 3 / 4; object-fit: cover;
   filter: saturate(.9) brightness(.94);
   border-radius: 50% 50% 4px 4px / 30% 30% 3px 3px;   /* a doorway */
 }
