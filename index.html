@@ -30,14 +30,39 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' x='4' font-size='26'>&#127807;</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <!-- bump ?v= whenever styles.css changes: GitHub Pages sends max-age=600,
      so without it browsers keep the old stylesheet for ten minutes -->
-<link rel="stylesheet" href="styles.css?v=12">
+<link rel="stylesheet" href="styles.css?v=13">
+
+<script>
+  /* Runs before paint. Without JS the threshold never shows and the page
+     is simply the page — nothing is gated behind script. */
+  (function () {
+    var d = document.documentElement;
+    d.classList.add('js');
+    var entered = false;
+    try { entered = sessionStorage.getItem('kb-entered') === '1'; } catch (e) {}
+    if (!entered) d.classList.add('threshold-closed');
+  })();
+</script>
 </head>
 
 <body>
 <a class="skip" href="#main">Skip to content</a>
+
+<!-- ---------- THE THRESHOLD ---------- -->
+<div class="threshold" id="threshold">
+  <div class="threshold-veil" aria-hidden="true"></div>
+  <div class="threshold-inner">
+    <p class="threshold-label">Energy readings</p>
+    <p class="threshold-name">Kimberly&nbsp;Berg</p>
+    <button class="enter" id="enter" type="button">
+      <span class="enter-ring" aria-hidden="true"></span>
+      <span class="enter-word">Enter</span>
+    </button>
+  </div>
+</div>
 
 <header class="site-header">
   <a class="wordmark" href="#top">Kimberly&nbsp;Berg</a>
@@ -209,6 +234,33 @@
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* The threshold. Crossing it is one click; it is remembered for the
+     session so it does not nag on every visit back. */
+  (function () {
+    var d = document.documentElement;
+    var t = document.getElementById('threshold');
+    var b = document.getElementById('enter');
+    if (!t || !b) return;
+
+    if (!d.classList.contains('threshold-closed')) { t.parentNode.removeChild(t); return; }
+
+    var moved = false;
+    function cross() {
+      if (moved) return;
+      moved = true;
+      try { sessionStorage.setItem('kb-entered', '1'); } catch (e) {}
+      d.classList.remove('threshold-closed');
+      d.classList.add('threshold-crossed');
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.setTimeout(function () {
+        if (t.parentNode) t.parentNode.removeChild(t);
+      }, reduce ? 0 : 1400);
+    }
+
+    b.addEventListener('click', cross);
+    window.setTimeout(function () { b.focus(); }, 60);
+  })();
 
   // Point every "Book & pay" button at the Stripe link once it exists.
   document.querySelectorAll('[data-stripe-link]').forEach(function (el) {
