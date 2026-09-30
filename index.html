@@ -33,7 +33,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
 <!-- bump ?v= whenever styles.css changes: GitHub Pages sends max-age=600,
      so without it browsers keep the old stylesheet for ten minutes -->
-<link rel="stylesheet" href="styles.css?v=30">
+<link rel="stylesheet" href="styles.css?v=34">
 
 <script>
   /* Runs before paint. Without JS the threshold never shows and the page
@@ -44,9 +44,7 @@
     /* The browser restores the last scroll offset on reload, which lands
        you below the header. Always open at the top instead. */
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-    var entered = false;
-    try { entered = sessionStorage.getItem('kb-entered') === '1'; } catch (e) {}
-    if (!entered) d.classList.add('threshold-closed');
+    d.classList.add('threshold-closed');
   })();
 </script>
 </head>
@@ -66,7 +64,7 @@
   </div>
 </div>
 
-<header class="site-header">
+<header class="site-header" id="top">
   <a class="wordmark" href="#top">Energy&nbsp;Readings <span>by</span> Kimberly</a>
   <nav aria-label="Main">
     <a href="#about">What it is</a>
@@ -79,7 +77,7 @@
 <main id="main">
 
   <!-- ---------- HERO ---------- -->
-  <section class="hero" id="top">
+  <section class="hero">
     <h1 class="statement">
       An energy reading is like getting your &ldquo;vibe&rdquo;
       read out loud.
@@ -238,6 +236,20 @@
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
+  /* The wordmark goes to the very top, not to an anchor that sits a
+     header's height down the page. href="#top" stays as the no-JS path. */
+  (function () {
+    var wm = document.querySelector('.wordmark');
+    if (!wm) return;
+    wm.addEventListener('click', function (e) {
+      e.preventDefault();
+      /* html already carries scroll-behavior: smooth, so a plain call
+         animates and works where the options form is ignored */
+      window.scrollTo(0, 0);
+      if (history.replaceState) history.replaceState(null, '', location.pathname);
+    });
+  })();
+
   /* The scroll cue retires the moment it has done its job. */
   (function () {
     var cue = document.getElementById('scroll-cue');
@@ -348,17 +360,10 @@
     var b = document.getElementById('enter');
     if (!t || !b) return;
 
-    if (!d.classList.contains('threshold-closed')) {
-      t.parentNode.removeChild(t);
-      window.scrollTo(0, 0);
-      return;
-    }
-
     var moved = false;
     function cross() {
       if (moved) return;
       moved = true;
-      try { sessionStorage.setItem('kb-entered', '1'); } catch (e) {}
       /* scroll is locked while the veil is up, so land at the top as it lifts */
       window.scrollTo(0, 0);
       d.classList.remove('threshold-closed');

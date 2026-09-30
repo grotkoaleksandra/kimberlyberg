@@ -255,7 +255,20 @@ html.threshold-closed main { transform: translateY(14px); }
 .steps p { color: var(--parch-dim); margin: 0; font-size: 1rem; line-height: 1.6; }
 
 /* ---------- quote ---------- */
-.quote-band { padding: clamp(72px, 9vw, 120px) 0; }
+/* the painting is the surface the quote is laid on, not a band of its own:
+   it fades into the ground top and bottom so it has no hard edges */
+.quote-band {
+  position: relative;
+  padding: clamp(110px, 16vh, 200px) 0;
+  background: url("assets/backdrop-sky.jpg") center 45% / cover no-repeat;
+}
+.quote-band::before {
+  content: ""; position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, var(--ground) 0%, rgba(21,17,29,.42) 26%,
+                    rgba(21,17,29,.42) 74%, var(--ground) 100%);
+}
+.quote-band .wrap { position: relative; }
 .quote-band .wrap { display: grid; place-items: center; }
 .pullquote {
   margin: 0; max-width: 660px; text-align: center;
