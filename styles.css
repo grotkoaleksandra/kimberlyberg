@@ -13,7 +13,7 @@
   --rule-firm: rgba(241,230,212,.3);
 
   --display: "Playfair Display", "Iowan Old Style", Georgia, serif;
-  --body:    "Cardo", "Iowan Old Style", Georgia, serif;
+  --body:    "Playfair Display", "Iowan Old Style", Georgia, serif;
 
   --wrap: 1060px;
   --gutter: 24px;
@@ -29,8 +29,8 @@ body {
   background: var(--ground);
   color: var(--parch);
   font-family: var(--body);
-  font-size: 19px;
-  line-height: 1.72;
+  font-size: 18px;
+  line-height: 1.78;
   -webkit-font-smoothing: antialiased;
 }
 
