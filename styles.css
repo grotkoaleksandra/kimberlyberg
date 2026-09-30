@@ -230,6 +230,14 @@ section { padding: clamp(60px, 9vw, 112px) 0; }
   border-bottom: 1px solid var(--line);
   padding: 24px 0;
 }
+/* side by side once there is room, split by a hairline */
+@media (min-width: 720px) {
+  .cards { grid-template-columns: 1fr 1fr; max-width: 800px; border-bottom: 1px solid var(--line); }
+  .card { border-bottom: 0; padding: 26px 0; }
+  .card:first-child { padding-right: 42px; }
+  .card + .card { border-left: 1px solid var(--line); padding-left: 42px; }
+  .card-list { flex-direction: column; gap: 4px; }
+}
 .card-head { display: flex; align-items: baseline; justify-content: space-between; gap: 18px; }
 .card-head h3 { margin: 0; }
 .price { font-family: var(--serif); font-weight: 400; font-size: 1.7rem; margin: 0; color: var(--accent); }
