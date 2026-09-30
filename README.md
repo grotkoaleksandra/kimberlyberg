@@ -13,6 +13,7 @@ Plain HTML and CSS — no build step, no dependencies. Hosted free on GitHub Pag
 | `assets/kimberly-2.jpg` | About-section photo — **placeholder**, overwrite or delete |
 | `CNAME.example` | Rename to `CNAME` once the domain is bought |
 | `.nojekyll` | Tells GitHub Pages to serve the files as-is |
+| `assets/backdrop-sky.jpg` | Fixed painterly backdrop. Photo by George Rosema, free under the Unsplash License — unsplash.com/photos/6PHGHTZ0gI4. Green and blue are washed over it in CSS (`.backdrop::before`), not baked into the file |
 
 ## The five things to fill in
 

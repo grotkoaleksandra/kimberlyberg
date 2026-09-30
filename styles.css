@@ -248,9 +248,28 @@ section { padding: clamp(56px, 9vw, 104px) 0; }
 @media (prefers-reduced-motion: no-preference) { .sprig { transition: opacity .4s; } }
 
 /* ---------- fixed backdrop + scrolling sheet ---------- */
+/* Backdrop: painterly abstract by George Rosema, free under the Unsplash
+   License (unsplash.com/photos/6PHGHTZ0gI4). The photo is warm orange and
+   mauve; the ::before layer washes green and blue through it with the
+   'color' blend mode, which recolours while keeping the brushwork, so both
+   palettes read at once. ::after darkens the edges so the sheet sits clear. */
 .backdrop {
   position: fixed; inset: 0; z-index: 0;
-  background: #1a2416 url("assets/backdrop.svg") center center / cover no-repeat;
+  background: #24302b url("assets/backdrop-sky.jpg") center center / cover no-repeat;
+}
+.backdrop::before,
+.backdrop::after { content: ""; position: absolute; inset: 0; }
+.backdrop::before {
+  background:
+    radial-gradient(68% 54% at  8%  4%, #1c7f86 0%, rgba(28,127,134,0) 66%),
+    radial-gradient(74% 58% at 80%  6%, #235f74 0%, rgba(35,95,116,0) 70%),
+    radial-gradient(62% 52% at 94% 86%, #2f7d52 0%, rgba(47,125,82,0) 68%);
+  mix-blend-mode: color;
+  opacity: .72;
+}
+.backdrop::after {
+  background:
+    radial-gradient(130% 100% at 50% 44%, rgba(12,26,22,0) 0%, rgba(10,22,18,.2) 70%, rgba(8,18,15,.44) 100%);
 }
 .sheet {
   position: relative; z-index: 1;
