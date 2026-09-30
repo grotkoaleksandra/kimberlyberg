@@ -33,7 +33,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
 <!-- bump ?v= whenever styles.css changes: GitHub Pages sends max-age=600,
      so without it browsers keep the old stylesheet for ten minutes -->
-<link rel="stylesheet" href="styles.css?v=28">
+<link rel="stylesheet" href="styles.css?v=30">
 
 <script>
   /* Runs before paint. Without JS the threshold never shows and the page
@@ -41,6 +41,9 @@
   (function () {
     var d = document.documentElement;
     d.classList.add('js');
+    /* The browser restores the last scroll offset on reload, which lands
+       you below the header. Always open at the top instead. */
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     var entered = false;
     try { entered = sessionStorage.getItem('kb-entered') === '1'; } catch (e) {}
     if (!entered) d.classList.add('threshold-closed');
@@ -88,8 +91,6 @@
 
     <div class="scroll-cue" id="scroll-cue" aria-hidden="true"><span></span></div>
   </section>
-
-  <div class="plate" role="img" aria-label="Abstract painting in orange, grey and green"></div>
 
   <!-- ---------- WHAT IT IS ---------- -->
   <section id="about">
@@ -254,7 +255,7 @@
      along the row so the arrows read in order. Runs once per element. */
   (function () {
     if (!('IntersectionObserver' in window)) return;
-    var targets = document.querySelectorAll('.steps li, .pullquote, .cards .card, .plate');
+    var targets = document.querySelectorAll('.steps li, .pullquote, .cards .card');
     if (!targets.length) return;
     for (var i = 0; i < targets.length; i++) targets[i].classList.add('reveal');
 
@@ -347,13 +348,19 @@
     var b = document.getElementById('enter');
     if (!t || !b) return;
 
-    if (!d.classList.contains('threshold-closed')) { t.parentNode.removeChild(t); return; }
+    if (!d.classList.contains('threshold-closed')) {
+      t.parentNode.removeChild(t);
+      window.scrollTo(0, 0);
+      return;
+    }
 
     var moved = false;
     function cross() {
       if (moved) return;
       moved = true;
       try { sessionStorage.setItem('kb-entered', '1'); } catch (e) {}
+      /* scroll is locked while the veil is up, so land at the top as it lifts */
+      window.scrollTo(0, 0);
       d.classList.remove('threshold-closed');
       d.classList.add('threshold-crossed');
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

@@ -180,14 +180,6 @@ html.threshold-closed main { transform: translateY(14px); }
 }
 .statement-link:hover { color: var(--parch); border-bottom-color: var(--parch); }
 
-/* ---------- the painting, glowing out of the dark ---------- */
-.plate {
-  height: clamp(220px, 34vw, 420px);
-  background: url("assets/backdrop-sky.jpg") center 42% / cover no-repeat;
-  -webkit-mask-image: linear-gradient(180deg, transparent, #000 22%, #000 78%, transparent);
-          mask-image: linear-gradient(180deg, transparent, #000 22%, #000 78%, transparent);
-  opacity: .92;
-}
 
 /* ---------- buttons ---------- */
 .btn { display: inline-block; font-size: .96rem; text-decoration: none; }
