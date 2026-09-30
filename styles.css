@@ -12,7 +12,10 @@
   --rule:      rgba(241,230,212,.15);
   --rule-firm: rgba(241,230,212,.3);
 
-  --serif: "EB Garamond", Iowan Old Style, Georgia, serif;
+  /* Marcellus is inscriptional - carved rather than written, which is
+     where the esoteric weight comes from. Cardo carries the reading. */
+  --display: "Marcellus", "Iowan Old Style", Georgia, serif;
+  --body:    "Cardo", "Iowan Old Style", Georgia, serif;
 
   --wrap: 1060px;
   --gutter: 24px;
@@ -27,7 +30,7 @@ body {
   margin: 0;
   background: var(--ground);
   color: var(--parch);
-  font-family: var(--serif);
+  font-family: var(--body);
   font-size: 19px;
   line-height: 1.72;
   -webkit-font-smoothing: antialiased;
@@ -38,7 +41,7 @@ img { max-width: 100%; height: auto; display: block; }
 a { color: var(--gold); text-underline-offset: 4px; text-decoration-thickness: 1px; }
 a:hover { color: var(--parch); }
 
-h1, h2, h3 { font-weight: 400; margin: 0 0 .6em; line-height: 1.08; letter-spacing: -.005em; }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; margin: 0 0 .6em; line-height: 1.08; letter-spacing: -.005em; }
 h1 { font-size: clamp(2.9rem, 7vw, 5rem); }
 h2 { font-size: clamp(1.9rem, 3.6vw, 2.7rem); }
 h3 { font-size: 1.22rem; }
@@ -87,10 +90,12 @@ html.threshold-crossed .threshold { opacity: 0; visibility: hidden; pointer-even
 
 .threshold-inner { position: relative; text-align: center; padding: 0 var(--gutter); }
 .threshold-label {
+  font-family: var(--body);
   font-size: .82rem; letter-spacing: .34em; text-transform: uppercase;
   color: var(--gold); margin: 0 0 2.4em; opacity: .9;
 }
 .threshold-name {
+  font-family: var(--display);
   font-size: clamp(2.6rem, 8vw, 4.6rem); line-height: 1; margin: 0 0 1.5em;
   color: var(--parch);
 }
@@ -99,7 +104,7 @@ html.threshold-crossed .threshold { opacity: 0; visibility: hidden; pointer-even
   appearance: none; background: none; border: 0; cursor: pointer;
   display: inline-grid; place-items: center;
   width: 148px; height: 148px; padding: 0;
-  font-family: var(--serif); color: var(--parch);
+  font-family: var(--display); color: var(--parch);
 }
 .enter-ring {
   position: absolute; width: 148px; height: 148px; border-radius: 50%;
@@ -147,7 +152,7 @@ html.threshold-closed main { transform: translateY(14px); }
   padding: 26px var(--gutter);
   border-bottom: 1px solid var(--rule);
 }
-.wordmark { font-size: 1.16rem; text-decoration: none; color: var(--parch); }
+.wordmark { font-family: var(--display); font-size: 1.16rem; text-decoration: none; color: var(--parch); }
 .site-header nav { display: flex; gap: clamp(16px, 2.6vw, 28px); flex-wrap: wrap; }
 .site-header nav a { font-size: .95rem; text-decoration: none; color: var(--parch-dim); }
 .site-header nav a:hover { color: var(--gold); }
@@ -158,16 +163,17 @@ html.threshold-closed main { transform: translateY(14px); }
 .hero {
   max-width: var(--wrap); margin-inline: auto;
   padding: clamp(64px, 12vh, 150px) var(--gutter) clamp(72px, 12vh, 160px);
+  text-align: center;
 }
 .statement {
   font-size: clamp(2.15rem, 6.2vw, 4.5rem);
   line-height: 1.07; letter-spacing: -.012em;
-  max-width: 19ch; margin: 0 0 1.1em;
+  max-width: 19ch; margin: 0 auto 1.1em;
   color: var(--parch); text-wrap: balance;
 }
 .statement-by {
-  font-size: 1.02rem; color: var(--parch-dim); font-style: italic;
-  margin: 0 0 2.2em; max-width: 42ch;
+  font-size: 1.02rem; color: var(--parch-dim);
+  margin: 0 auto 2.2em; max-width: 52ch;
 }
 .statement-link {
   display: inline-block; font-size: 1.02rem; color: var(--gold);
@@ -219,7 +225,7 @@ html.threshold-closed main { transform: translateY(14px); }
 .quote-band { padding: clamp(72px, 9vw, 120px) 0; }
 .pullquote { margin: 0; max-width: 26ch; }
 .pullquote p {
-  font-size: clamp(1.7rem, 3.6vw, 2.5rem); font-style: italic;
+  font-family: var(--display); font-size: clamp(1.7rem, 3.6vw, 2.5rem);
   line-height: 1.22; margin: 0 0 1em; color: var(--parch);
 }
 .pullquote cite { font-style: normal; font-size: .95rem; color: var(--parch-dim); }
@@ -234,7 +240,7 @@ html.threshold-closed main { transform: translateY(14px); }
 .card { border-top: 1px solid var(--rule); padding: 20px 0 26px; }
 .card-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
 .card-head h3 { margin: 0; }
-.price { font-size: 1.7rem; margin: 0; color: var(--gold); }
+.price { font-family: var(--display); font-size: 1.7rem; margin: 0; color: var(--gold); }
 .card-list { list-style: none; margin: 14px 0 0; padding: 0; color: var(--parch-dim); font-size: 1rem; }
 .card-list li { margin-bottom: 2px; }
 .request { margin: 44px 0 0; }
@@ -268,3 +274,8 @@ html.threshold-closed main { transform: translateY(14px); }
 @media (min-width: 840px) { .contact-grid { grid-template-columns: 1.25fr .75fr; } }
 .contact-photo { margin: 0; }
 .contact-photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; filter: saturate(.92) brightness(.95); }
+
+/* ---------- sparkle trail ---------- */
+.sparkles { position: fixed; inset: 0; z-index: 85; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { .sparkles { display: none; } }
+@media (hover: none), (pointer: coarse) { .sparkles { display: none; } }
