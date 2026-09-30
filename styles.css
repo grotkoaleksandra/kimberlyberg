@@ -152,7 +152,10 @@ html.threshold-closed main { transform: translateY(14px); }
   padding: 26px var(--gutter);
   border-bottom: 1px solid var(--rule);
 }
-.wordmark { font-family: var(--display); font-size: 1.16rem; text-decoration: none; color: var(--parch); }
+.wordmark {
+  font-family: var(--display); font-size: 1.06rem; text-decoration: none; color: var(--parch);
+}
+.wordmark span { color: var(--gold); padding: 0 .1em; }
 .site-header nav { display: flex; gap: clamp(16px, 2.6vw, 28px); flex-wrap: wrap; }
 .site-header nav a { font-size: .95rem; text-decoration: none; color: var(--parch-dim); }
 .site-header nav a:hover { color: var(--gold); }
@@ -225,10 +228,32 @@ html.threshold-closed main { transform: translateY(14px); }
 }
 
 /* ---------- how it works ---------- */
-.steps { list-style: none; margin: 46px 0 0; padding: 0; display: grid; gap: 34px; grid-template-columns: 1fr; }
-@media (min-width: 640px)  { .steps { grid-template-columns: 1fr 1fr; gap: 40px 44px; } }
-@media (min-width: 1000px) { .steps { grid-template-columns: repeat(4, 1fr); gap: 40px 34px; } }
-.steps li { border-top: 1px solid var(--rule); padding-top: 18px; }
+/* A sequence, so it always reads as one: four across on wide screens with
+   arrows between, a single stack with arrows pointing down below that.
+   The 2x2 is gone - it broke the order into two unrelated rows. */
+.steps { list-style: none; margin: 46px 0 0; padding: 0; display: grid; gap: 46px; grid-template-columns: 1fr; }
+@media (min-width: 1000px) { .steps { grid-template-columns: repeat(4, 1fr); gap: 40px 56px; } }
+.steps li { border-top: 1px solid var(--rule); padding-top: 18px; position: relative; }
+
+/* arrow: a hairline with a chevron head, drawn rather than a glyph */
+.steps li + li::before,
+.steps li + li::after { content: ""; position: absolute; background: none; }
+.steps li + li::before {
+  width: 22px; height: 1px; background: rgba(220,174,90,.55);
+}
+.steps li + li::after {
+  width: 6px; height: 6px;
+  border-top: 1px solid rgba(220,174,90,.55);
+  border-right: 1px solid rgba(220,174,90,.55);
+}
+/* stacked: pointing down, sitting in the gap above each step */
+.steps li + li::before { left: 1px; top: -26px; width: 1px; height: 22px; }
+.steps li + li::after  { left: -1px; top: -12px; transform: rotate(135deg); }
+@media (min-width: 1000px) {
+  /* one row: pointing across, centred in the gap */
+  .steps li + li::before { left: -39px; top: 52px; width: 22px; height: 1px; }
+  .steps li + li::after  { left: -23px; top: 49px; transform: rotate(45deg); }
+}
 .step-n { display: block; font-size: .95rem; color: var(--gold); margin-bottom: 16px; }
 .steps h3 { margin: 0 0 .4em; }
 .steps p { color: var(--parch-dim); margin: 0; font-size: 1rem; line-height: 1.6; }
@@ -244,20 +269,21 @@ html.threshold-closed main { transform: translateY(14px); }
 .pullquote cite { font-style: normal; font-size: .95rem; color: var(--parch-dim); }
 
 /* ---------- sessions ---------- */
-.cards { display: grid; gap: 0; grid-template-columns: 1fr; margin: 44px 0 0; max-width: 780px; }
+#book .wrap { text-align: center; }
+.cards { display: grid; gap: 0; grid-template-columns: 1fr; margin: 44px auto 0; max-width: 780px; }
 @media (min-width: 720px) {
   .cards { grid-template-columns: 1fr 1fr; }
   .card:first-child { padding-right: 44px; }
   .card + .card { padding-left: 44px; border-left: 1px solid var(--rule); }
 }
 .card { border-top: 1px solid var(--rule); padding: 20px 0 26px; }
-.card-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+.card-head { display: flex; align-items: baseline; justify-content: center; gap: 20px; }
 .card-head h3 { margin: 0; }
 .price { font-family: var(--display); font-size: 1.7rem; margin: 0; color: var(--gold); }
 .card-list { list-style: none; margin: 14px 0 0; padding: 0; color: var(--parch-dim); font-size: 1rem; }
 .card-list li { margin-bottom: 2px; }
-.request { margin: 44px 0 0; }
-.aside { margin-top: 28px; color: var(--parch-dim); max-width: 50ch; font-size: 1rem; }
+.request { margin: 44px auto 0; }
+.aside { margin: 28px auto 0; color: var(--parch-dim); max-width: 50ch; font-size: 1rem; }
 
 /* ---------- contact ---------- */
 .contact-list { list-style: none; margin: 34px 0 0; padding: 0; max-width: 560px; }
@@ -292,3 +318,16 @@ html.threshold-closed main { transform: translateY(14px); }
 .sparkles { position: fixed; inset: 0; z-index: 85; pointer-events: none; }
 @media (prefers-reduced-motion: reduce) { .sparkles { display: none; } }
 @media (hover: none), (pointer: coarse) { .sparkles { display: none; } }
+
+/* ---------- reveal on scroll ----------
+   Only ever hidden when JS is present and motion is welcome, so the page
+   is readable with script off or reduced motion on. */
+html.js .reveal { opacity: 0; transform: translateY(22px); }
+html.js .reveal.is-in {
+  opacity: 1; transform: none;
+  transition: opacity .9s cubic-bezier(.2,.7,.3,1), transform .9s cubic-bezier(.2,.7,.3,1);
+}
+@media (prefers-reduced-motion: reduce) {
+  html.js .reveal { opacity: 1; transform: none; }
+  html.js .reveal.is-in { transition: none; }
+}

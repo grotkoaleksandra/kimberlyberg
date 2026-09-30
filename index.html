@@ -33,7 +33,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cardo:wght@400;700&family=Marcellus&display=swap" rel="stylesheet">
 <!-- bump ?v= whenever styles.css changes: GitHub Pages sends max-age=600,
      so without it browsers keep the old stylesheet for ten minutes -->
-<link rel="stylesheet" href="styles.css?v=17">
+<link rel="stylesheet" href="styles.css?v=20">
 
 <script>
   /* Runs before paint. Without JS the threshold never shows and the page
@@ -67,7 +67,7 @@
 </div>
 
 <header class="site-header">
-  <a class="wordmark" href="#top">Kimberly&nbsp;Berg</a>
+  <a class="wordmark" href="#top">Kimberly&nbsp;Berg <span>&mdash;</span> Energy&nbsp;Readings</a>
   <nav aria-label="Main">
     <a href="#about">What it is</a>
     <a href="#reading">How it works</a>
@@ -237,6 +237,28 @@
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* Reveal on scroll. Each step rises as it comes into view, staggered
+     along the row so the arrows read in order. Runs once per element. */
+  (function () {
+    if (!('IntersectionObserver' in window)) return;
+    var targets = document.querySelectorAll('.steps li, .pullquote, .cards .card, .plate');
+    if (!targets.length) return;
+    for (var i = 0; i < targets.length; i++) targets[i].classList.add('reveal');
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var el = e.target;
+        var sibs = el.parentNode ? Array.prototype.indexOf.call(el.parentNode.children, el) : 0;
+        el.style.transitionDelay = Math.min(sibs, 5) * 110 + 'ms';
+        el.classList.add('is-in');
+        io.unobserve(el);
+      });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.15 });
+
+    for (var j = 0; j < targets.length; j++) io.observe(targets[j]);
+  })();
 
   /* Sparkle trail. Pointer devices only, and never when the visitor has
      asked for reduced motion. Particles are capped and the loop stops
