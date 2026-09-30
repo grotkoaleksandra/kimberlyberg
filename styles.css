@@ -206,11 +206,23 @@ html.threshold-closed main { transform: translateY(14px); }
 .btn:focus-visible, a:focus-visible { outline: 1px solid var(--gold); outline-offset: 4px; }
 
 /* ---------- what it is ---------- */
-.two-col { display: grid; gap: clamp(30px, 5vw, 60px); grid-template-columns: 1fr; align-items: start; }
+.two-col { display: grid; gap: clamp(30px, 5vw, 60px); grid-template-columns: 1fr; align-items: center; }
 @media (min-width: 900px) { .two-col { grid-template-columns: .4fr .6fr; } }
-.two-col p { max-width: 58ch; color: var(--parch); }
+.two-col p { max-width: 58ch; color: var(--parch); margin-bottom: 1.5em; }
+.two-col p.lead { font-size: 1.24rem; line-height: 1.55; color: var(--parch); }
 .portrait { margin: 0; }
-.portrait img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; filter: saturate(.9) brightness(.94); }
+.portrait img {
+  width: 100%; aspect-ratio: 4 / 5; object-fit: cover;
+  filter: saturate(.9) brightness(.94);
+  border-radius: 50% 50% 4px 4px / 30% 30% 3px 3px;   /* a doorway */
+}
+.portrait { position: relative; }
+.portrait::after {
+  content: ""; position: absolute; inset: -9px;
+  border: 1px solid rgba(220,174,90,.28);
+  border-radius: 50% 50% 6px 6px / 29% 29% 4px 4px;
+  pointer-events: none;
+}
 
 /* ---------- how it works ---------- */
 .steps { list-style: none; margin: 46px 0 0; padding: 0; display: grid; gap: 34px; grid-template-columns: 1fr; }
@@ -223,10 +235,11 @@ html.threshold-closed main { transform: translateY(14px); }
 
 /* ---------- quote ---------- */
 .quote-band { padding: clamp(72px, 9vw, 120px) 0; }
-.pullquote { margin: 0; max-width: 26ch; }
+.quote-band .wrap { display: grid; place-items: center; }
+.pullquote { margin: 0; max-width: 660px; text-align: center; }
 .pullquote p {
   font-family: var(--display); font-size: clamp(1.7rem, 3.6vw, 2.5rem);
-  line-height: 1.22; margin: 0 0 1em; color: var(--parch);
+  line-height: 1.24; margin: 0 0 1.1em; color: var(--parch); text-wrap: balance;
 }
 .pullquote cite { font-style: normal; font-size: .95rem; color: var(--parch-dim); }
 
@@ -270,7 +283,7 @@ html.threshold-closed main { transform: translateY(14px); }
 .site-footer a:hover { color: var(--gold); }
 
 /* ---------- contact ---------- */
-.contact-grid { display: grid; gap: clamp(30px, 5vw, 60px); grid-template-columns: 1fr; align-items: end; }
+.contact-grid { display: grid; gap: clamp(30px, 5vw, 60px); grid-template-columns: 1fr; align-items: center; }
 @media (min-width: 840px) { .contact-grid { grid-template-columns: 1.25fr .75fr; } }
 .contact-photo { margin: 0; }
 .contact-photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; filter: saturate(.92) brightness(.95); }
