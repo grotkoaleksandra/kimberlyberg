@@ -152,27 +152,30 @@ html.threshold-closed main { transform: translateY(14px); }
 .site-header nav a { font-size: .95rem; text-decoration: none; color: var(--parch-dim); }
 .site-header nav a:hover { color: var(--gold); }
 
-/* ---------- hero ---------- */
+/* ---------- hero: her sentence, nothing else ----------
+   No name plate, no headshot, no button pair. You cross the threshold,
+   which already carried her name, and land inside what she says. */
 .hero {
   max-width: var(--wrap); margin-inline: auto;
-  padding-inline: var(--gutter); padding-bottom: clamp(60px, 8vw, 104px);
-  display: grid; gap: clamp(30px, 5vw, 58px);
-  grid-template-columns: 1fr; align-items: end;
+  padding: clamp(64px, 12vh, 150px) var(--gutter) clamp(72px, 12vh, 160px);
 }
-@media (min-width: 900px) { .hero { grid-template-columns: 1.2fr .8fr; } }
-.eyebrow {
-  font-size: .78rem; letter-spacing: .3em; text-transform: uppercase;
-  color: var(--gold); margin: 0 0 2em;
+.statement {
+  font-size: clamp(2.15rem, 6.2vw, 4.5rem);
+  line-height: 1.07; letter-spacing: -.012em;
+  max-width: 19ch; margin: 0 0 1.1em;
+  color: var(--parch); text-wrap: balance;
 }
-.hero h1 { margin-bottom: .3em; }
-.lede { font-size: clamp(1.2rem, 2vw, 1.45rem); color: var(--parch-dim); max-width: 34ch; margin: 0; font-style: italic; }
-.hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 26px; margin-top: 36px; }
-
-.hero-photo { margin: 0; }
-.hero-photo img {
-  width: 100%; aspect-ratio: 4 / 5; object-fit: cover;
-  filter: saturate(.92) brightness(.96);
+.statement-by {
+  font-size: 1.02rem; color: var(--parch-dim); font-style: italic;
+  margin: 0 0 2.2em; max-width: 42ch;
 }
+.statement-link {
+  display: inline-block; font-size: 1.02rem; color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(220,174,90,.45); padding-bottom: 4px;
+  transition: border-color .3s, color .3s;
+}
+.statement-link:hover { color: var(--parch); border-bottom-color: var(--parch); }
 
 /* ---------- the painting, glowing out of the dark ---------- */
 .plate {
@@ -259,3 +262,9 @@ html.threshold-closed main { transform: translateY(14px); }
 .site-footer p { margin: 0; }
 .site-footer a { color: var(--parch-dim); }
 .site-footer a:hover { color: var(--gold); }
+
+/* ---------- contact ---------- */
+.contact-grid { display: grid; gap: clamp(30px, 5vw, 60px); grid-template-columns: 1fr; align-items: end; }
+@media (min-width: 840px) { .contact-grid { grid-template-columns: 1.25fr .75fr; } }
+.contact-photo { margin: 0; }
+.contact-photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; filter: saturate(.92) brightness(.95); }

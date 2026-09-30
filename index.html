@@ -33,7 +33,7 @@
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <!-- bump ?v= whenever styles.css changes: GitHub Pages sends max-age=600,
      so without it browsers keep the old stylesheet for ten minutes -->
-<link rel="stylesheet" href="styles.css?v=13">
+<link rel="stylesheet" href="styles.css?v=14">
 
 <script>
   /* Runs before paint. Without JS the threshold never shows and the page
@@ -78,20 +78,14 @@
 
   <!-- ---------- HERO ---------- -->
   <section class="hero" id="top">
-    <div class="hero-text">
-      <p class="eyebrow">Energy readings</p>
-      <h1>Kimberly Berg</h1>
-      <p class="lede">
-        An energy reading is like getting your &ldquo;vibe&rdquo; read out loud.
-      </p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="#book">Request a booking</a>
-        <a class="btn btn-ghost" href="#about">What&rsquo;s an energy reading?</a>
-      </div>
-    </div>
-    <figure class="hero-photo">
-      <img src="assets/kimberly-1.jpg" alt="Kimberly Berg" width="800" height="1000" loading="eager">
-    </figure>
+    <h1 class="statement">
+      An energy reading is like getting your &ldquo;vibe&rdquo;
+      read out loud.
+    </h1>
+    <p class="statement-by">
+      Kimberly Berg &mdash; by phone, half an hour or a full hour
+    </p>
+    <a class="statement-link" href="#book">Request a booking</a>
   </section>
 
   <div class="plate" role="img" aria-label="Abstract painting in orange, grey and green"></div>
@@ -213,13 +207,18 @@
 
   <!-- ---------- CONTACT ---------- -->
   <section id="contact">
-    <div class="wrap narrow">
-      <h2>Get in touch</h2>
-      <p>Questions before you book are always welcome.</p>
-      <ul class="contact-list">
-        <li><span class="label">Email</span> <a href="mailto:Kimberlykberg@yahoo.com">Kimberlykberg@yahoo.com</a></li>
-        <li><span class="label">Phone</span> <a href="tel:+13103879131">+1 (310) 387-9131</a></li>
-      </ul>
+    <div class="wrap contact-grid">
+      <div>
+        <h2>Get in touch</h2>
+        <p>Questions before you book are always welcome.</p>
+        <ul class="contact-list">
+          <li><span class="label">Email</span> <a href="mailto:Kimberlykberg@yahoo.com">Kimberlykberg@yahoo.com</a></li>
+          <li><span class="label">Phone</span> <a href="tel:+13103879131">+1 (310) 387-9131</a></li>
+        </ul>
+      </div>
+      <figure class="contact-photo">
+        <img src="assets/kimberly-1.jpg" alt="Kimberly Berg" width="800" height="1000" loading="lazy">
+      </figure>
     </div>
   </section>
 
