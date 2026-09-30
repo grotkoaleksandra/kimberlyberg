@@ -155,18 +155,21 @@ html.threshold-closed main { transform: translateY(14px); }
    No name plate, no headshot, no button pair. You cross the threshold,
    which already carried her name, and land inside what she says. */
 .hero {
+  position: relative;
   max-width: var(--wrap); margin-inline: auto;
-  padding: clamp(64px, 12vh, 150px) var(--gutter) clamp(72px, 12vh, 160px);
+  padding: clamp(40px, 7vh, 96px) var(--gutter) clamp(104px, 15vh, 180px);
   text-align: center;
+  min-height: 80vh; min-height: 80svh;
+  display: grid; align-content: center;
 }
 .statement {
-  font-size: clamp(2.15rem, 6.2vw, 4.5rem);
-  line-height: 1.07; letter-spacing: -.012em;
-  max-width: 19ch; margin: 0 auto 1.1em;
+  font-size: clamp(2.5rem, 7.4vw, 6rem);
+  line-height: 1.04; letter-spacing: -.018em;
+  max-width: 18ch; margin: 0 auto 1em;
   color: var(--parch); text-wrap: balance;
 }
 .statement-by {
-  font-size: 1.02rem; color: var(--parch-dim);
+  font-size: 1.08rem; color: var(--parch-dim);
   margin: 0 auto 2.2em; max-width: 52ch;
 }
 .statement-link {
@@ -351,3 +354,23 @@ html.js .reveal.is-in {
    .reveal would replace the rotation, and is-in's `none` would drop it */
 html.js .pullquote.reveal { transform: translateY(22px) rotate(-.7deg); }
 html.js .pullquote.reveal.is-in { transform: rotate(-.7deg); }
+
+/* ---------- scroll cue ---------- */
+.scroll-cue {
+  position: absolute; left: 50%; bottom: clamp(26px, 5vh, 52px);
+  transform: translateX(-50%);
+  width: 1px; height: 56px; overflow: hidden;
+  background: rgba(241,230,212,.14);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.scroll-cue span {
+  position: absolute; left: 0; width: 1px; height: 60%;
+  background: linear-gradient(180deg, rgba(220,174,90,0), var(--gold));
+  animation: cue-fall 2.6s cubic-bezier(.65,0,.35,1) infinite;
+}
+@keyframes cue-fall { 0% { top: -62%; } 100% { top: 102%; } }
+.scroll-cue.is-gone { opacity: 0; transform: translateX(-50%) translateY(10px); }
+@media (prefers-reduced-motion: reduce) {
+  .scroll-cue span { animation: none; top: 20%; }
+  .scroll-cue { transition: opacity .01s; }
+}

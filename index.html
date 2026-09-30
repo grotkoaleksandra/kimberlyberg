@@ -33,7 +33,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
 <!-- bump ?v= whenever styles.css changes: GitHub Pages sends max-age=600,
      so without it browsers keep the old stylesheet for ten minutes -->
-<link rel="stylesheet" href="styles.css?v=27">
+<link rel="stylesheet" href="styles.css?v=28">
 
 <script>
   /* Runs before paint. Without JS the threshold never shows and the page
@@ -85,6 +85,8 @@
       Kimberly Berg &mdash; by phone, half an hour or a full hour
     </p>
     <a class="statement-link" href="#book">Request a booking</a>
+
+    <div class="scroll-cue" id="scroll-cue" aria-hidden="true"><span></span></div>
   </section>
 
   <div class="plate" role="img" aria-label="Abstract painting in orange, grey and green"></div>
@@ -234,6 +236,19 @@
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* The scroll cue retires the moment it has done its job. */
+  (function () {
+    var cue = document.getElementById('scroll-cue');
+    if (!cue) return;
+    function retire() {
+      if (window.scrollY > 40) {
+        cue.classList.add('is-gone');
+        window.removeEventListener('scroll', retire);
+      }
+    }
+    window.addEventListener('scroll', retire, { passive: true });
+  })();
 
   /* Reveal on scroll. Each step rises as it comes into view, staggered
      along the row so the arrows read in order. Runs once per element. */
