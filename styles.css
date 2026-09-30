@@ -100,35 +100,26 @@ html.threshold-crossed .threshold { opacity: 0; visibility: hidden; pointer-even
   color: var(--parch);
 }
 
+.threshold-inner { cursor: pointer; }
 .enter {
   appearance: none; background: none; border: 0; cursor: pointer;
-  display: inline-grid; place-items: center;
-  width: 148px; height: 148px; padding: 0;
-  font-family: var(--display); color: var(--parch);
+  padding: 12px 2px 10px; position: relative;
+  font-family: var(--body); font-size: .92rem;
+  letter-spacing: .42em; text-indent: .42em;   /* tracking pushes the centre right */
+  color: var(--parch-dim);
+  transition: color .6s;
 }
-.enter-ring {
-  position: absolute; width: 148px; height: 148px; border-radius: 50%;
-  border: 1px solid rgba(220,174,90,.5);
-  transition: transform .7s cubic-bezier(.2,.7,.3,1), border-color .7s, box-shadow .7s;
-  animation: breathe 5.5s ease-in-out infinite;
+.enter::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
+  background: rgba(220,174,90,.4);
+  transform: scaleX(.34); transform-origin: 50% 50%;
+  transition: transform 1s cubic-bezier(.2,.7,.3,1), background 1s;
 }
-@keyframes breathe {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(220,174,90,0); }
-  50%      { box-shadow: 0 0 44px 2px rgba(220,174,90,.16); }
-}
-@media (prefers-reduced-motion: reduce) { .enter-ring { animation: none; } }
-.enter-word {
-  position: relative; font-size: 1.16rem; letter-spacing: .2em;
-  text-transform: lowercase; color: var(--parch);
-}
-.enter:hover .enter-ring,
-.enter:focus-visible .enter-ring {
-  transform: scale(1.09);
-  border-color: var(--gold);
-  box-shadow: 0 0 60px 4px rgba(220,174,90,.24);
-}
+.threshold-inner:hover .enter,
+.enter:focus-visible { color: var(--parch); }
+.threshold-inner:hover .enter::after,
+.enter:focus-visible::after { transform: scaleX(1); background: var(--gold); }
 .enter:focus-visible { outline: none; }
-.enter:hover .enter-word { color: var(--gold); }
 
 /* the page itself arrives once the threshold is crossed */
 html.threshold-closed .site-header,
@@ -231,9 +222,16 @@ html.threshold-closed main { transform: translateY(14px); }
 /* A sequence, so it always reads as one: four across on wide screens with
    arrows between, a single stack with arrows pointing down below that.
    The 2x2 is gone - it broke the order into two unrelated rows. */
-.steps { list-style: none; margin: 46px 0 0; padding: 0; display: grid; gap: 46px; grid-template-columns: 1fr; }
-@media (min-width: 1000px) { .steps { grid-template-columns: repeat(4, 1fr); gap: 40px 56px; } }
-.steps li { border-top: 1px solid var(--rule); padding-top: 18px; position: relative; }
+.steps { list-style: none; margin: 46px 0 0; padding: 0; display: grid; gap: 58px; grid-template-columns: 1fr; }
+@media (min-width: 1000px) { .steps { grid-template-columns: repeat(4, 1fr); gap: 40px 60px; } }
+.steps li {
+  position: relative;
+  border: 1px solid var(--rule);
+  background: rgba(241,230,212,.028);
+  padding: 22px 22px 26px;
+  transition: border-color .5s, background .5s;
+}
+.steps li:hover { border-color: rgba(220,174,90,.4); background: rgba(241,230,212,.05); }
 
 /* arrow: a hairline with a chevron head, drawn rather than a glyph */
 .steps li + li::before,
@@ -246,15 +244,15 @@ html.threshold-closed main { transform: translateY(14px); }
   border-top: 1px solid rgba(220,174,90,.55);
   border-right: 1px solid rgba(220,174,90,.55);
 }
-/* stacked: pointing down, sitting in the gap above each step */
-.steps li + li::before { left: 1px; top: -26px; width: 1px; height: 22px; }
-.steps li + li::after  { left: -1px; top: -12px; transform: rotate(135deg); }
+/* stacked: pointing down, centred in the gap above each box */
+.steps li + li::before { left: 50%; top: -34px; width: 1px; height: 24px; transform: translateX(-50%); }
+.steps li + li::after  { left: 50%; top: -18px; transform: translateX(-50%) rotate(135deg); }
 @media (min-width: 1000px) {
-  /* one row: pointing across, centred in the gap */
-  .steps li + li::before { left: -39px; top: 52px; width: 22px; height: 1px; }
-  .steps li + li::after  { left: -23px; top: 49px; transform: rotate(45deg); }
+  /* one row: pointing across, centred in the gap between boxes */
+  .steps li + li::before { left: -41px; top: 50%; width: 26px; height: 1px; transform: translateY(-50%); }
+  .steps li + li::after  { left: -22px; top: 50%; transform: translateY(-50%) rotate(45deg); }
 }
-.step-n { display: block; font-size: .95rem; color: var(--gold); margin-bottom: 16px; }
+.step-n { display: block; font-size: .85rem; color: var(--gold); margin-bottom: 14px; }
 .steps h3 { margin: 0 0 .4em; }
 .steps p { color: var(--parch-dim); margin: 0; font-size: 1rem; line-height: 1.6; }
 

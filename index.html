@@ -33,7 +33,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cardo:wght@400;700&family=Marcellus&display=swap" rel="stylesheet">
 <!-- bump ?v= whenever styles.css changes: GitHub Pages sends max-age=600,
      so without it browsers keep the old stylesheet for ten minutes -->
-<link rel="stylesheet" href="styles.css?v=20">
+<link rel="stylesheet" href="styles.css?v=22">
 
 <script>
   /* Runs before paint. Without JS the threshold never shows and the page
@@ -59,10 +59,7 @@
   <div class="threshold-inner">
     <p class="threshold-label">Energy readings</p>
     <p class="threshold-name">Kimberly&nbsp;Berg</p>
-    <button class="enter" id="enter" type="button">
-      <span class="enter-ring" aria-hidden="true"></span>
-      <span class="enter-word">Enter</span>
-    </button>
+    <button class="enter" id="enter" type="button">enter</button>
   </div>
 </div>
 
@@ -350,7 +347,15 @@
       }, reduce ? 0 : 1400);
     }
 
+    /* The whole veil is the way in: click it, scroll it, or press a key.
+       The word is only the cue, and stays a real focusable button. */
     b.addEventListener('click', cross);
+    t.addEventListener('click', cross);
+    window.addEventListener('wheel', cross, { passive: true, once: true });
+    window.addEventListener('touchmove', cross, { passive: true, once: true });
+    window.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown' || e.key === 'Escape') cross();
+    });
     window.setTimeout(function () { b.focus(); }, 60);
   })();
 
